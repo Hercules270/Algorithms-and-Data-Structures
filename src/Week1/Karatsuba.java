@@ -78,6 +78,8 @@ public class Karatsuba {
 
         }
 
+        scanner.close();
+
 
     }
 }

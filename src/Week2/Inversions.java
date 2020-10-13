@@ -12,7 +12,7 @@ class Inversions {
 
 
     private static int sortAndCountInversions(int[] array, int length) {
-        if(array.length == 1) {
+        if(array.length == BASE_CASE) {
             return 0;
         }
 

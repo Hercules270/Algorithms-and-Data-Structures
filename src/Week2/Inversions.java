@@ -36,13 +36,7 @@ class Inversions {
     }
 
     private static int mergeAndCountSplit(int[] left, int[] right, int[] array, int length) {
-        // if(left.length == 3) {
-        // System.out.println("Left " + Arrays.toString(left));
-
-        // }
-        int i = 0;
-        int j = 0;
-        int k = 0;
+        int i = 0, j = 0, k = 0;
         int count = 0;
         for(;k < length; k++) {
             if(i == left.length || j == right.length) break;
@@ -58,18 +52,13 @@ class Inversions {
 
         while(i<left.length) {
             array[k++] = left[i++];
-            //count++;
         }
-
         while(j < right.length) {
             array[k++] = right[j++];
         }
 
         return count;
     }
-
-
-
 
     public static void main(String[] args) throws IOException {
 

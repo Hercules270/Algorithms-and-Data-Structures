@@ -3,14 +3,12 @@ package Week3;
 import java.util.Scanner;
 import java.util.Arrays;
 import java.util.Random;
-//import java.util.stream.*;
 
+//This Class implements quick sort algorithm 
 public class QuickSort { 
-
 
     public void sort(int[] array, int left, int right) {
 
-       //System.out.println("In sort method. left is -- " + left + " and right is -- " + right);
         if (left >= right) return;
         int pivotIndex = left; // new Random.nextInt(right - left) + left;
         swap(array, left, pivotIndex);
@@ -35,49 +33,63 @@ public class QuickSort {
         return i-1;
     }
 
-    //   
-
-    private void swap(int[] array, int from, int to) {
-        
+    private void swap(int[] array, int from, int to) { 
         int tmp = array[from];
         array[from] = array[to];
         array[to] = tmp;
     }
 
     
-    
 
     public static void main(String[] args) {
-
-        //sortArray();
-        testing();
+        Scanner scanner = new Scanner(System.in);
+        sortArray(scanner);
+        scanner.close();
     }
 
-    private static void testing()  {
+
+    private static void sortArray(Scanner scanner) {
+        while(true) {
+            long startTime = System.currentTimeMillis();
+            int[] array = getArrayRandomly(scanner);
+            
+            if (array.length == 0) return;
+            new QuickSort().sort(array, 0, array.length - 1);
+            
+            System.out.println("Array is " + isSorted(array) + "\n");
+            System.out.println("Time needed for sorting " + array.length + " integers with MERGESORT was " + (System.currentTimeMillis() - startTime));
+           
+        }
+    }
+
+    public static String isSorted(int[] array) {
+        for(int i=1; i<array.length; i++) {
+            if (array[i] < array[i-1]) return "NOT SORTED";
+        }
+        return "SORTED";
+    }
+
+    public static int[] getArrayRandomly(Scanner scanner) {
+        Random random = new Random();
+        System.out.println("Please enter size of array");
+        int size = scanner.nextInt();
+        int[] array = new int[size];
+        for(int i=0; i < array.length; i++) {
+            array[i] = random.nextInt(array.length*10); 
+        }
+        return array;
+    }
+
+    public static int[] getArrayFromInput() {
         Scanner scanner = new Scanner(System.in);
-        QuickSort sort = new QuickSort();
-        System.out.println("Please enter number of elements in array ");
-        String arr = scanner.nextLine();
-        String [] array = (String[]) Arrays.stream(arr.substring(1, arr.length() - 1).split(",")).map(String::trim).toArray();
-        //Arrays.stream(arr.substring(1,arr.length() - 1).split(",")).map(String::trim).mapToInt(Integer::parseInt).toArray();
-        System.out.println(Arrays.toString(array));
        
-    }
-
-    private static void sortArray() {
-        Scanner scanner = new Scanner(System.in);
-        QuickSort sort = new QuickSort();
         System.out.println("Please enter number of elements in array ");
         String arr = scanner.nextLine();
 
         int[] array = Arrays.stream(arr.substring(1,arr.length() - 1).split(",")).map(String::trim).mapToInt(Integer::parseInt).toArray();
-        System.out.println("Before sorting " + Arrays.toString(array));
-        
-        sort.sort(array, 0, array.length - 1);
-        System.out.println("After sorting " + Arrays.toString(array));
         scanner.close();
+        return array;
     }
 }
 
 
-// [1,2,3,4]

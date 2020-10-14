@@ -3,7 +3,12 @@ package Week2;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
+import java.util.ArrayList;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 
 class Inversions {
@@ -11,7 +16,7 @@ class Inversions {
     private static final int BASE_CASE = 1;
 
 
-    private static int sortAndCountInversions(int[] array, int length) {
+    private static long sortAndCountInversions(int[] array, int length) {
         if(array.length == BASE_CASE) {
             return 0;
         }
@@ -23,19 +28,19 @@ class Inversions {
         System.arraycopy(array, 0, left, 0, length/2);
         System.arraycopy(array, length/2, right, 0, length/2 + length%2);
 
-        int leftInv = sortAndCountInversions(left, length/2);
-        int rightInv = sortAndCountInversions(right, length/2 + length % 2);
+        long leftInv = sortAndCountInversions(left, length/2);
+        long rightInv = sortAndCountInversions(right, length/2 + length % 2);
 
-        int splitInv = mergeAndCountSplit(left, right, array, length);
+        long splitInv = mergeAndCountSplit(left, right, array, length);
 
 
         return leftInv + rightInv + splitInv;
 
     }
 
-    private static int mergeAndCountSplit(int[] left, int[] right, int[] array, int length) {
+    private static long mergeAndCountSplit(int[] left, int[] right, int[] array, int length) {
         int i = 0, j = 0, k = 0;
-        int count = 0;
+        long count = 0;
         for(;k < length; k++) {
             if(i == left.length || j == right.length) break;
             if(left[i] <= right[j]) {
@@ -46,8 +51,7 @@ class Inversions {
                 count += (left.length - i);
             }
         }
-
-
+        
         while(i<left.length) {
             array[k++] = left[i++];
         }
@@ -57,32 +61,19 @@ class Inversions {
 
         return count;
     }
-
-    public static void main(String[] args) throws IOException {
-
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        String[] strInts;
-        int[] array = new int[100000];
-
-        for(int i=0; i<100000; i++) {
-            array[i] = i;
-
+    public static void main(String[] args) throws  FileNotFoundException{
+        Scanner scanner = new Scanner(new File("/mnt/d/GitHub/Algorithms and Data Structures/src/Week2/a.txt"));
+        List<Integer> list = new ArrayList<>();
+        
+        while(scanner.hasNextInt()) {
+            list.add(scanner.nextInt());
         }
-        strInts = reader.readLine().split("\\s");
-        System.out.println("Reading ended successfully...");
-   /* while(true) {
-      strInts = reader.readLine().split("\\s");
-	  System.out.println("Reading ended successfully...");
-      int[] array = new int[strInts.length];
-      for (int i=0; i < strInts.length; i++) {
-       array[i] = Integer.parseInt(strInts[i]);
-      }
-      */
-        System.out.println("Copying ended succesfully...");
 
-        System.out.println("Number of inversions is " + sortAndCountInversions(array, array.length));
-        // System.out.println(Arrays.toString(array));
-
+        int[] array = list.stream().mapToInt(i -> i).toArray();
+        
+        long result = sortAndCountInversions(array, array.length);
+        
+        System.out.println("Result is " + result);
     }
 
 }

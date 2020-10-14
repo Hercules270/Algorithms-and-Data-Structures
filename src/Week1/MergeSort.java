@@ -1,13 +1,10 @@
 package Week1;
 
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 
+import java.util.Scanner;
 import Week3.QuickSort;
 
-import java.util.Arrays;
 
 class MergeSort {
 
@@ -54,27 +51,6 @@ class MergeSort {
     }
 
 
-    // public static void main(String[] args) {
-    //     Scanner scan = new Scanner(System.in);
-    //     MergeSort sort = new MergeSort();
-    //     List<Integer> list = new ArrayList<>();
-        
-    //     int x = scan.nextInt();
-    //     while(x != -1) {
-    //         list.add(x);
-    //         x = scan.nextInt();
-
-    //     }
-    //     int[] arr = new int[list.size()];
-    //     for(int i=0; i<arr.length; i++) {
-    //         arr[i] = list.get(i);
-    //     }
-
-    //     sort.sort(arr);
-
-    //     System.out.println(Arrays.toString(arr));
-    //     scan.close();
-    // }
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);

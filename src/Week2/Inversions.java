@@ -59,7 +59,7 @@ class Inversions {
         return count;
     }
     public static void main(String[] args) throws  FileNotFoundException{
-        Scanner scanner = new Scanner(new File("/mnt/d/GitHub/Algorithms and Data Structures/src/Week2/a.txt"));
+        Scanner scanner = new Scanner(new File("D:\\GitHub\\Algorithms and Data Structures\\src\\Week2\\Assignment2.txt"));
         List<Integer> list = new ArrayList<>();
         
         while(scanner.hasNextInt()) {
